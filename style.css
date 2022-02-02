@@ -5,6 +5,7 @@
     padding: 0;
     list-style-type: none;
     font-family: 'Calibri';
+    scroll-behavior: smooth;
     
 }
 @font-face {
@@ -17,17 +18,19 @@
 }
 
 
-body {
+body, html {
     margin: 0;
     padding: 0;
     min-height: 100%;
     background-color: #E8D7CD;
+    scroll-behavior: smooth;
 }
 
 /* NAV */
 
 
 nav{
+    position: sticky;
     display: flex;
     justify-content: space-between;
     width: 100%;
@@ -35,6 +38,7 @@ nav{
     border-bottom: 1px solid black;
     padding : 0 2% 0 2%;
     background-color: #cddddc;
+    transition: .6s ease;
 }
 #logo{
     display: flex;
