@@ -30,37 +30,13 @@ closePanier.addEventListener("click", () =>{
 /* Ajouter produit au panier */
 
 
-if (document.readyState == 'loading') {
-    document.addEventListener('DOMContentLoaded', ready)
-} else {
-    ready()
+
+/* Le produit est supprimé du panier quand on clique sur la poubelle */
+var removeCartItemButtons = document.getElementsByClassName('btn-remove')
+for (var i = 0; i < removeCartItemButtons.length; i++) {
+    var button = removeCartItemButtons[i]
+    button.addEventListener('click', removeCartItem)
 }
-
-function ready() {
-    var removeCartItemButtons = document.getElementsByClassName('btn-remove')
-    for (var i = 0; i < removeCartItemButtons.length; i++) {
-        var button = removeCartItemButtons[i]
-        button.addEventListener('click', removeCartItem)
-    }
-
-    var quantityInputs = document.getElementsByClassName('cart-quantity-input')
-    for (var i = 0; i < quantityInputs.length; i++) {
-        var input = quantityInputs[i]
-        input.addEventListener('change', quantityChanged)
-    }
-
-    var addToCartButtons = document.getElementsByClassName('shop-item-button')
-    for (var i = 0; i < addToCartButtons.length; i++) {
-        var button = addToCartButtons[i]
-        button.addEventListener('click', addToCartClicked)
-    }
-
-
-}
-
-
-
-
 function removeCartItem(event) {
     var buttonClicked = event.target
     buttonClicked.parentElement.parentElement.parentElement.remove()
@@ -69,6 +45,12 @@ function removeCartItem(event) {
 
 
 
+/* Permet de modifier la quantité d'un type de produit */
+var quantityInputs = document.getElementsByClassName('cart-quantity-input')
+for (var i = 0; i < quantityInputs.length; i++) {
+    var input = quantityInputs[i]
+    input.addEventListener('change', quantityChanged)
+}
 function quantityChanged(event) {
     var input = event.target
     if (isNaN(input.value) || input.value <= 0) {
@@ -79,15 +61,23 @@ function quantityChanged(event) {
 
 
 
+/* Ajoute le produit au panier quand on clique sur le bouton ADD */
+var addToCartButtons = document.getElementsByClassName('shop-item-button')
+for (var i = 0; i < addToCartButtons.length; i++) {
+    var button = addToCartButtons[i]
+    button.addEventListener('click', addToCartClicked)
+}
 function addToCartClicked(event) {
     var button = event.target
     var shopItem = button.parentElement.parentElement
+    console.log(shopItem)
     var title = shopItem.getElementsByClassName('title')[0].innerText
     var price = shopItem.getElementsByClassName('price')[0].innerText
     var imageSrc = shopItem.getElementsByClassName('image')[0].src
     addItemToCart(title, price, imageSrc)
     updateCartTotal()
 }
+
 
 function addItemToCart(title, price, imageSrc) {
     var cartRow = document.createElement('div')
@@ -118,6 +108,9 @@ function addItemToCart(title, price, imageSrc) {
     cartRow.getElementsByClassName('cart-quantity-input')[0].addEventListener('change', quantityChanged)
 }
 
+
+
+/* Le prix total est actualisé en fonction des articles ajoutés ou retirés */
 function updateCartTotal() {
     var cartItemContainer = document.getElementsByClassName('cart-items')[0]
     var cartRows = cartItemContainer.getElementsByClassName('cart-row')

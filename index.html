@@ -6,6 +6,7 @@
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
     <title>Document</title>
     <link rel="stylesheet" href="./style.css">
+    <link rel="stylesheet" media="screen and (max-width: 767px)" href="responsive.css"/>
 </head>
 <body>
 
@@ -17,8 +18,10 @@
 
 
         <div id="onglet">
+            <div class="picto" id="searchbar">
+                <input type="text" placeholder="Search..">              
+            </div>
             <div class="picto" id="search">
-                <input type="text" placeholder="Search..">
                 <img src="./picto/search.png">
             </div>
             <div class="picto" id="fav">
@@ -79,6 +82,7 @@
         </div>
 
         <div id="down">
+            
             <div class="cart-row">
                 <span class="cart-column">ITEM</span>
                 <span class="cart-column">PRICE</span>
